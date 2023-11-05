@@ -2,6 +2,7 @@ package com.project;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,25 +20,41 @@ public class Main {
 
         System.out.println("Test 1");
         personList.forEach(person -> {
-            if (person.getAge() < 30) {
+            if (person.getAge() > 24) {
                 System.out.println(person);
             }
         });
+        System.out.println("Var 2");
+        List<Person> persons = personList.stream()
+                .filter(person -> person.getAge() > 24)
+                .toList();
+        System.out.println(persons);
 
         System.out.println("Test 2");
 
         personList.forEach(person -> {
-            if(person instanceof Student && person.getAge() < 30){
+            if (person instanceof Student && person.getAge() < 30) {
                 System.out.println(person);
             }
         });
+        System.out.println("Var 2");
+
+        List<Person> persons2 = personList.stream()
+                .filter(person -> person instanceof Student)
+                .collect(Collectors.toList());
+        System.out.println(persons2);
 
         System.out.println("Test 3");
         personList.forEach(person -> {
-            if(person instanceof Worker && ((Worker) person).getSalary() > 2000){
+            if (person instanceof Worker && ((Worker) person).getSalary() > 2000) {
                 System.out.println(person);
             }
         });
 
+        System.out.println("Var 2");
+        List<Person> persons3 = personList.stream()
+                .filter(person -> person instanceof Worker && ((Worker) person).getSalary() > 2000)
+                .collect(Collectors.toList());
+        System.out.println(persons3);
     }
 }
